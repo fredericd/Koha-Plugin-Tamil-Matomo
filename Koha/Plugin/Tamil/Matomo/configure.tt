@@ -1,0 +1,50 @@
+[% INCLUDE "$PLUGIN_DIR/head.tt" %]
+
+<h1>Configuration de Koha ⇄ Matomo</h1>
+
+<form method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+
+ <input type="hidden" name="class" value="[% CLASS %]"/>
+ <input type="hidden" name="method" value="[% METHOD %]"/>
+ <input type="hidden" name="op" value="cud-save"/>
+
+ <fieldset class="rows">
+  <legend>Accès à Matomo</legend>
+  <ol>
+   <li>
+    <label for="matomo.url">URL du tracker :</label>
+    <input id="matomo.url" type="text" name="matomo.url" size="50" value="[% c.matomo.url %]" />
+   </li>
+   <li>
+    <label for="matomo.siteid">ID du site :</label>
+    <input id="matomo.siteid" type="text" name="matomo.siteid" size="50" value="[% c.matomo.siteid %]" />
+   </li>
+  </ol>
+ </fieldset>
+
+ <fieldset class="rows">
+  <legend>OPAC</legend>
+  <ol>
+   <li>
+    <label for="opac.enable">Activer :</label>
+    <input type="checkbox"
+           id="opac.enable"
+           name="opac.enable"
+           size="15"
+           value="1"
+           [% IF c.opac.enable == 1 %]checked[% END %]
+           />
+    le tracker à l'OPAC
+   </li>
+  </ol>
+ </fieldset>
+
+ <fieldset class="action">
+  <input type="hidden" name="save" value="1" />
+  <input type="submit" value="Enregistrer" />
+ </fieldset>
+
+</form>
+
+[% INCLUDE "$PLUGIN_DIR/foot.tt" %]

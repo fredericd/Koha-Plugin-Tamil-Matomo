@@ -1,0 +1,21 @@
+[% INCLUDE "$PLUGIN_DIR/head.tt" %]
+
+<style>
+.markdown {
+  font-size: 120%;
+}
+.markdown h2, .markdown h3 {
+  margin-top: 20px;
+}
+.markdown img {
+  width: 100%;
+}
+ul li, ol li { margin-bottom:10px; }
+
+</style>
+
+<div class="markdown">
+  [% markdown %]
+</div>
+
+[% INCLUDE "$PLUGIN_DIR/foot.tt" %]
