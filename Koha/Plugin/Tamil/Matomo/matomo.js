@@ -28,8 +28,6 @@ $(document).ready(function() {
       _paq.push(['trackPageView', "Recherche : " + q]);
     },
     'opac-detail': () => {
-      console.log('opac-detail');
-
       // Récupération du biblionumber
       let biblionumber;
       const { location } = window;
@@ -42,7 +40,6 @@ $(document).ready(function() {
       }
 
       const title = $('h2.title').text();
-      console.log(title);
       _paq.push(['trackEvent', 'Notice', 'Vue', biblionumber]);
       _paq.push([
         'trackContentImpression',
