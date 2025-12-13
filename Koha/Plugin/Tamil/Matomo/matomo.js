@@ -1,20 +1,21 @@
 $(document).ready(function() {
- 
+
   let c = tamil_matomo_conf;
   var _paq = window._paq = window._paq || [];
 
-  let u = "https://matomo.tamil.fr/";
   _paq.push(['setTrackerUrl', c.matomo.url + '/' + 'matomo.php']);
   _paq.push(['setSiteId', c.matomo.siteid]);
   var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-  g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  g.async=true; g.src=c.matomo.url+'/matomo.js'; s.parentNode.insertBefore(g,s);
 
-  const where = document.body.id;
   const trackPerPage = {
-    'advsearch': () => {
-      _paq.push(['trackPageView', "Formulaire de recherche avancée"]);
+    main: (page) => {
+      _paq.push(['trackPageView', page.title]);
     },
-    'results': () => {
+    advsearch: (page) => {
+      _paq.push(['trackPageView', page.title]);
+    },
+    results: (page) => {
       let q = [];
       $('#bookbag_form input[type="hidden"]').each(function() {
         const name = $(this).attr('name');
@@ -25,9 +26,9 @@ $(document).ready(function() {
       });
       q = q.join('');
       _paq.push(['trackSiteSearch', q]);
-      _paq.push(['trackPageView', "Recherche : " + q]);
+      _paq.push(['trackPageView', `${page.title} : ${q}`]);
     },
-    'opac-detail': () => {
+    detail: (page) => {
       // Récupération du biblionumber
       let biblionumber;
       const { location } = window;
@@ -40,7 +41,7 @@ $(document).ready(function() {
       }
 
       const title = $('h2.title').text();
-      _paq.push(['trackEvent', 'Notice', 'Vue', biblionumber]);
+      _paq.push(['trackEvent', 'Biblio', 'View', biblionumber]);
       _paq.push([
         'trackContentImpression',
         'Notice',              // contentName : catégorie générale
@@ -50,9 +51,21 @@ $(document).ready(function() {
       _paq.push(['trackPageView', title]);
       _paq.push(['enableLinkTracking']);
     },
+    page: (page) => {
+      _paq.push(['trackPageView', page.title + ' : ' + $('.maincontent h1').text() ]);
+      _paq.push(['enableLinkTracking']);
+
+    },
   };
-  trackPerPage[where]();
-  
+
+  const where = document.body.id;
+  const { page } = c.opac;
+  Object.keys(page).forEach((actionid) => {
+    const thispage = page[actionid];
+    if (where.startsWith(thispage.id)) {
+      trackPerPage[actionid](thispage);
+    }
+  });
 });
 
 

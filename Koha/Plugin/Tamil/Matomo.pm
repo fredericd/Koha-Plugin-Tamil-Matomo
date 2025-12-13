@@ -23,10 +23,10 @@ our $metadata = {
     author          => 'Tamil s.a.r.l.',
     date_authored   => '2025-12-10',
     date_updated    => "2025-12-10",
-    minimum_version => '22.11.00.000',
+    minimum_version => '24.11.00.000',
     maximum_version => undef,
     copyright       => '2025',
-    version         => '1.0.0',
+    version         => '1.0.1',
 };
 
 
@@ -60,6 +60,17 @@ sub config {
     $c->{matomo}->{url} ||= '//matomo.tamil.fr';
     $c->{matomo}->{siteid} ||= '1';
 
+    $c->{opac}->{page}->{main}->{id}           = 'opac-main';
+    $c->{opac}->{page}->{main}->{title}      ||= 'Accueil OPAC';
+    $c->{opac}->{page}->{advsearch}->{id}      = 'advsearch';
+    $c->{opac}->{page}->{advsearch}->{title} ||= 'Recherche avancée';
+    $c->{opac}->{page}->{results}->{id}        = 'results';
+    $c->{opac}->{page}->{results}->{title}   ||= 'Résultat recherche';
+    $c->{opac}->{page}->{detail}->{id}         = 'opac-detail';
+    $c->{opac}->{page}->{detail}->{title}    ||= 'Notice';
+    $c->{opac}->{page}->{page}->{id}           = 'opac-page';
+    $c->{opac}->{page}->{page}->{title}      ||= 'Page';
+
     $c->{metadata} = $self->{metadata};
 
     $self->{args}->{c} = $c;
@@ -77,6 +88,13 @@ sub get_form_config {
         },
         opac => {
             enable => undef,
+            page => {
+                main      => { title => undef },
+                advsearch => { title => undef },
+                results   => { title => undef },
+                detail    => { title => undef },
+                page      => { title => undef },
+            },
         },
     };
 

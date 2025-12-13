@@ -15,7 +15,7 @@ points suivants :
 
 **▼ TÉLÉCHARGEMENT ▼** — Récupérez sur le site [Tamil](https://www.tamil.fr)
 l'archive du plugin **[Koha ⇄
-Matomo](https://www.tamil.fr/download/koha-plugin-tamil-matomo.kpz)**.
+Matomo](https://www.tamil.fr/download/koha-plugin-tamil-matomo-1.0.1.kpz)**.
 
 - **Installation** — Dans l'interface pro de Koha, allez dans Outils > Outils
   de Plugins. Cliquez sur Télécharger un plugin. Choisissez l'archive
@@ -30,7 +30,7 @@ Matomo](https://www.tamil.fr/download/koha-plugin-tamil-matomo.kpz)**.
 
 ## VERSIONS
 
-* **1.0.0** / déc. 2025 -- Version initiale.
+* **1.0.1** / déc. 2025 -- Version initiale.
 
 ## LICENCE
 

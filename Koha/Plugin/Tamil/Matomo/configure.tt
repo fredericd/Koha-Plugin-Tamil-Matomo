@@ -37,6 +37,26 @@
            />
     le tracker à l'OPAC
    </li>
+   <li>
+    <label for="opac.page.main.title">Accueil :</label>
+    <input id="opac.page.main.title" type="text" name="opac.page.main.title" size="50" value="[% c.opac.page.main.title %]" />
+   </li>
+   <li>
+    <label for="opac.page.advsearch.title">Recherche avancée :</label>
+    <input id="opac.page.advsearch.title" type="text" name="opac.page.advsearch.title" size="50" value="[% c.opac.page.advsearch.title %]" />
+   </li>
+   <li>
+    <label for="opac.page.results.title">Résultat :</label>
+    <input id="opac.page.results.title" type="text" name="opac.page.results.title" size="50" value="[% c.opac.page.results.title %]" />
+   </li>
+   <li>
+    <label for="opac.page.detail.title">Détail notice :</label>
+    <input id="opac.page.detail.title" type="text" name="opac.page.detail.title" size="50" value="[% c.opac.page.detail.title %]" />
+   </li>
+   <li>
+    <label for="opac.page.page.title">Page statique :</label>
+    <input id="opac.page.page.title" type="text" name="opac.page.page.title" size="50" value="[% c.opac.page.page.title %]" />
+   </li>
   </ol>
  </fieldset>
 
