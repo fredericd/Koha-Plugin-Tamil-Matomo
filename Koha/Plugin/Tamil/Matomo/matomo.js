@@ -48,7 +48,7 @@ $(document).ready(function() {
         biblionumber + ' : ' + title,        // contentPiece : identifiant unique
         location.href          // contentTarget : URL de la notice
       ]);
-      _paq.push(['trackPageView', title]);
+      _paq.push(['trackPageView', `${page.title} : ${title}`]);
       _paq.push(['enableLinkTracking']);
     },
     page: (page) => {
