@@ -25,7 +25,7 @@ our $metadata = {
     minimum_version => '24.11.00.000',
     maximum_version => undef,
     copyright       => '2026',
-    version         => '1.0.2',
+    version         => '1.0.3',
     namespace       => 'matomo',
 };
 
