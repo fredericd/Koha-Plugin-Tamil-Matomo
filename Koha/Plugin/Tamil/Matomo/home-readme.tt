@@ -1,34 +1,132 @@
 <h1 id="plugin-koha--matomo">Plugin Koha ⇄ Matomo</h1>
 <p><strong>Koha ⇄ Matomo</strong> est un plugin qui facilite
 l'intégration d'un OPAC Koha au système de mesure de la fréquentation
-d'un site web Matomo.</p>
+d'un site web <a href="https://matomo.org">Matomo</a>. Il insère le code
+de suivi Matomo dans les pages de l'OPAC et enrichit les statistiques
+avec des informations propres à Koha : recherches effectuées, notices
+consultées, pages éditoriales.</p>
+<p>Aucune modification de la préférence système <code>OPACUserJS</code>
+n'est nécessaire : le plugin injecte lui-même son code dans l'OPAC.</p>
+<h2 id="prérequis">Prérequis</h2>
+<ul>
+<li>Koha <strong>24.11</strong> ou supérieur.</li>
+<li>Une instance Matomo accessible depuis le navigateur des usagers de
+l'OPAC dans laquelle un site a été créé pour l'OPAC. Notez son
+<strong>ID de site</strong> (Administration &gt; Sites web &gt;
+Gérer).</li>
+</ul>
 <h2 id="installation">Installation</h2>
 <p><strong>Activation des plugins</strong> — Si ce n'est pas déjà fait,
-dans Koha, activez les plugins. Demandez à votre prestataire Koha de le
-faire, ou bien vérifiez les points suivants :</p>
-<ul>
-<li>Dans <code>koha-conf.xml</code>, activez les plugins.</li>
-<li>Dans le fichier de configuration d'Apache, définissez l'alias
-<code>/plugins</code>.</li>
-<li>Activez la préférence système <code>UseKohaPlugins</code>.</li>
-</ul>
+activez les plugins dans Koha. Demandez à votre prestataire Koha de le
+faire, ou bien vérifiez que
+<code>&lt;enable_plugins&gt;1&lt;/enable_plugins&gt;</code> est présent
+dans <code>koha-conf.xml</code>.</p>
 <p><strong>▼ TÉLÉCHARGEMENT ▼</strong> — Récupérez sur le site <a
 href="https://www.tamil.fr">Tamil</a> l'archive du plugin <strong><a
 href="https://www.tamil.fr/download/koha-plugin-tamil-matomo-1.0.2.kpz">Koha
 ⇄ Matomo</a></strong>.</p>
+<p><strong>Installation</strong> — Dans l'interface pro de Koha, allez
+dans Outils &gt; Outils de plugins. Cliquez sur Télécharger un plugin.
+Choisissez l'archive téléchargée à l'étape précédente. Cliquez sur
+Télécharger.</p>
+<h2 id="configuration">Configuration</h2>
+<p>Dans Outils &gt; Outils de plugins, sur la ligne du plugin
+<strong>Koha ⇄ Matomo</strong>, choisissez Actions &gt; Configurer.</p>
+<p><strong>Accès à Matomo</strong></p>
 <ul>
-<li><p><strong>Installation</strong> — Dans l'interface pro de Koha,
-allez dans Outils &gt; Outils de Plugins. Cliquez sur Télécharger un
-plugin. Choisissez l'archive téléchargée à l'étape précédente. Cliquez
-sur Télécharger.</p></li>
-<li><p><strong>Configuration</strong> — Dans les Outils de plugins, vous
-voyez le plugin <strong>Koha ⇄ Matomo</strong>.</p></li>
+<li><strong>URL du tracker</strong> — Adresse de votre instance Matomo,
+sans <code>/</code> final ni nom de fichier, par exemple
+<code>https://stats.example.org</code>. La forme
+<code>//stats.example.org</code> permet de suivre le protocole de
+l'OPAC. Le plugin ajoute lui-même <code>/matomo.php</code> et
+<code>/matomo.js</code>.</li>
+<li><strong>ID du site</strong> — Identifiant du site Matomo
+correspondant à l'OPAC.</li>
 </ul>
-<h2 id="versions">VERSIONS</h2>
+<p><strong>OPAC</strong></p>
 <ul>
-<li><strong>1.0.1</strong> / déc. 2025 -- Version initiale.</li>
+<li><strong>Activer le tracker à l'OPAC</strong> — Tant que cette case
+n'est pas cochée, aucun code Matomo n'est envoyé à l'OPAC.</li>
+<li><strong>Titres des pages</strong> — Libellés sous lesquels chaque
+type de page apparaît dans Matomo : Accueil, Recherche avancée,
+Résultat, Détail notice et Page statique. Les valeurs par défaut
+conviennent dans la plupart des cas.</li>
 </ul>
-<h2 id="licence">LICENCE</h2>
+<p>L'enregistrement de la configuration prend effet immédiatement à
+l'OPAC.</p>
+<h2 id="données-envoyées-à-matomo">Données envoyées à Matomo</h2>
+<p>Le suivi ne porte que sur les pages suivantes de l'OPAC. Les autres
+pages (compte usager, panier, etc.) ne sont pas suivies.</p>
+<table>
+<thead>
+<tr>
+<th>Page OPAC</th>
+<th>Ce qui est mesuré dans Matomo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accueil</td>
+<td>Une page vue, sous le titre configuré.</td>
+</tr>
+<tr>
+<td>Recherche avancée</td>
+<td>Une page vue, sous le titre configuré.</td>
+</tr>
+<tr>
+<td>Résultats de recherche</td>
+<td>Une <strong>recherche interne</strong> (Comportement &gt; Recherche
+interne) avec la requête de l'usager, et une page vue intitulée
+<code>&lt;titre&gt; : &lt;requête&gt;</code>.</td>
+</tr>
+<tr>
+<td>Détail d'une notice</td>
+<td>Un <strong>événement</strong> <code>Biblio</code> /
+<code>View</code> / <code>&lt;biblionumber&gt;</code>, une
+<strong>impression de contenu</strong> <code>Notice</code> /
+<code>&lt;biblionumber&gt; : &lt;titre&gt;</code>, une page vue
+intitulée <code>&lt;titre&gt; : &lt;titre de la notice&gt;</code> et le
+suivi des liens sortants.</td>
+</tr>
+<tr>
+<td>Page éditoriale (<code>opac-page.pl</code>)</td>
+<td>Une page vue intitulée
+<code>&lt;titre&gt; : &lt;titre de la page&gt;</code> et le suivi des
+liens sortants.</td>
+</tr>
+</tbody>
+</table>
+<p>Pour exploiter pleinement ces données dans Matomo :</p>
+<ul>
+<li>activez la <strong>recherche interne</strong> dans les paramètres du
+site, afin que les requêtes de l'OPAC apparaissent dans les rapports de
+recherche ;</li>
+<li>consultez les notices les plus vues dans Comportement &gt;
+Événements (catégorie <code>Biblio</code>) ou Comportement &gt;
+Contenus.</li>
+</ul>
+<h2 id="vie-privée">Vie privée</h2>
+<p>Le plugin ne gère pas le consentement des usagers. Selon votre
+politique RGPD, configurez Matomo en conséquence (anonymisation des
+adresses IP, suivi sans cookie, etc.) ou conditionnez le suivi au
+consentement recueilli par Koha.</p>
+<h2 id="dépannage">Dépannage</h2>
+<ul>
+<li><strong>Rien n'apparaît dans Matomo</strong> — Vérifiez que la case
+Activer est cochée, que l'URL du tracker est correcte et que
+<code>&lt;URL du tracker&gt;/matomo.js</code> est accessible depuis un
+navigateur. Un bloqueur de publicité peut aussi empêcher le suivi.</li>
+<li><strong>Le code de suivi est absent de l'OPAC</strong> — Vérifiez
+que le plugin est activé dans Outils de plugins. Le code est mis en
+cache côté Koha pendant une heure ; le cache est vidé à chaque
+enregistrement de la configuration.</li>
+</ul>
+<h2 id="versions">Versions</h2>
+<ul>
+<li><strong>1.0.2</strong> / oct. 2026 — Déploiement facilité.</li>
+<li><strong>1.0.1</strong> / déc. 2025 — Version initiale.</li>
+</ul>
+<h2 id="licence">Licence</h2>
 <p>This software is copyright (c) 2025 by Tamil s.a.r.l..</p>
 <p>This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.</p>
