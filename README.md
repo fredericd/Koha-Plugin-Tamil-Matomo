@@ -21,10 +21,6 @@ Matomo](https://www.tamil.fr/download/koha-plugin-tamil-matomo-1.0.1.kpz)**.
   de Plugins. Cliquez sur Télécharger un plugin. Choisissez l'archive
   téléchargée à l'étape précédente. Cliquez sur Télécharger.
 
-  Le plugin utilise par ailleurs un module Perl qu'on ne trouve pas en
-  standard avec Koha : `Pithub::Markdown`. Il faut l'installer sur votre
-  serveur Koha.
-
 - **Configuration** — Dans les Outils de plugins, vous voyez le plugin **Koha ⇄
   Matomo**.
 

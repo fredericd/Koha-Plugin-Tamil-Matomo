@@ -10,7 +10,6 @@ use Mojo::JSON qw(decode_json encode_json);
 use Template;
 use JSON qw/ to_json /;
 use List::Util qw/ first /;
-use Pithub::Markdown;
 use YAML;
 
 
@@ -176,23 +175,6 @@ sub tool {
     }
     else {
         $template = $self->get_template({ file => 'home.tt' });
-        my $cache = $self->{cache};
-        my $key = "matomo-home";
-        my $markdown = $cache->get_from_cache($key);
-        unless ($markdown) {
-            my $text = $self->mbf_read("home.md");
-            utf8::decode($text);
-            my $response = Pithub::Markdown->new->render(
-                data => {
-                    text => $text,
-                    context => "github/gollum",
-                },
-            );
-            $markdown = $response->raw_content;
-            utf8::decode($markdown);
-            $cache->set_in_cache($key, $markdown, { expiry => 3600 });
-        }
-        $template->param( markdown => $markdown );
     }
     $template->param( c => $self->config() );
     $template->param( TOOL => $tool ) if $tool;
