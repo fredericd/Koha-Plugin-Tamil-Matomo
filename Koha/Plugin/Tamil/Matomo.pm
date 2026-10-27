@@ -26,6 +26,7 @@ our $metadata = {
     maximum_version => undef,
     copyright       => '2025',
     version         => '1.0.1',
+    namespace       => 'matomo',
 };
 
 
@@ -120,6 +121,31 @@ sub get_form_config {
 
     $set->($c);
     return $c;
+}
+
+
+sub api_namespace { return $metadata->{namespace} }
+
+# Every file in img/ is served under /api/v1/contrib/matomo/static/img/
+sub static_routes {
+    my $self = shift;
+    my $dir = $self->bundle_path;
+    my $spec = {};
+    for my $file ( glob("$dir/img/*") ) {
+        $file =~ s/^\Q$dir\E//;
+        $spec->{$file} = {
+            get => {
+                'x-mojo-to' => 'Static#get',
+                responses => {
+                    200 => {
+                        description => 'File found',
+                        schema => { type => 'file' },
+                    },
+                },
+            },
+        };
+    }
+    return $spec;
 }
 
 

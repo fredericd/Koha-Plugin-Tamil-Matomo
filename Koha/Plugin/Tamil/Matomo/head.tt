@@ -13,7 +13,7 @@
 
 <div class="main">
   <a href="https://www.matomo.org" alt="Site web de Matomo">
-    <img src="[% PLUGIN_PATH %]/img/matomo.svg"/>
+    <img src="/api/v1/contrib/matomo/static/img/matomo.svg"/>
   </a>
 </div>
 
