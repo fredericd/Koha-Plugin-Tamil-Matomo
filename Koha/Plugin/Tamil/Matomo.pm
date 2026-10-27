@@ -220,7 +220,7 @@ sub opac_js {
     }
     else {
         $logger->debug('Lecture et mise en cache de matomo.js');
-        my $js = $self->mbf_read('matomo.js');
+        $js = $self->mbf_read('matomo.js');
         utf8::decode($js);
         my $json = to_json($c);
         $js = <<EOS;
