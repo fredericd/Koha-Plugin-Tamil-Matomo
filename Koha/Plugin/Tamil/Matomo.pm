@@ -21,11 +21,11 @@ our $metadata = {
     description     => 'Interfaçage entre Koha et Matomo',
     author          => 'Tamil s.a.r.l.',
     date_authored   => '2025-12-10',
-    date_updated    => "2025-12-10",
+    date_updated    => "2026-10-27",
     minimum_version => '24.11.00.000',
     maximum_version => undef,
-    copyright       => '2025',
-    version         => '1.0.1',
+    copyright       => '2026',
+    version         => '1.0.2',
     namespace       => 'matomo',
 };
 
