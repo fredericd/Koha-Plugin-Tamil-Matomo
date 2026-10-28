@@ -1,13 +1,6 @@
-   </div>
-  </div>
- </div>
-</div>
-
-<div style="text-align:center; ">
- <img src="/api/v1/contrib/matomo/static/img/tamil-logo-small.png"/>
+<div style="text-align:center;">
+ <img src="/api/v1/contrib/matomo/static/img/tamil-logo-small.png" alt="Tamil"/>
  <br/>
- &copy; [% c.metadata.copyright %]
- — Version [% c.metadata.version %]
+ &copy; [% c.metadata.copyright | html %]
+ — Version [% c.metadata.version | html %]
 </div>
-
-[% INCLUDE 'intranet-bottom.inc' %]

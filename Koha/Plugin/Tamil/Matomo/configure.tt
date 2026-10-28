@@ -1,3 +1,4 @@
+[% WRAPPER 'wrapper-staff-tool-plugin.inc' plugin_title = 'Matomo' method = 'configure' %]
 [% INCLUDE "$PLUGIN_DIR/head.tt" %]
 
 <h1>Configuration de Koha ⇄ Matomo</h1>
@@ -5,20 +6,22 @@
 <form method="post">
  [% INCLUDE 'csrf-token.inc' %]
 
- <input type="hidden" name="class" value="[% CLASS %]"/>
- <input type="hidden" name="method" value="[% METHOD %]"/>
+ <input type="hidden" name="class" value="[% CLASS | html %]"/>
+ <input type="hidden" name="method" value="[% METHOD | html %]"/>
  <input type="hidden" name="op" value="cud-save"/>
 
  <fieldset class="rows">
   <legend>Accès à Matomo</legend>
   <ol>
    <li>
-    <label for="matomo.url">URL du tracker :</label>
-    <input id="matomo.url" type="text" name="matomo.url" size="50" value="[% c.matomo.url %]" />
+    <label for="matomo.url">URL du tracker&nbsp;:</label>
+    <input id="matomo.url" type="text" name="matomo.url" size="50" value="[% c.matomo.url | html %]" />
+    <div class="hint">Adresse du serveur Matomo, sans « / » final. Par exemple : //matomo.example.org</div>
    </li>
    <li>
-    <label for="matomo.siteid">ID du site :</label>
-    <input id="matomo.siteid" type="text" name="matomo.siteid" size="50" value="[% c.matomo.siteid %]" />
+    <label for="matomo.siteid">ID du site&nbsp;:</label>
+    <input id="matomo.siteid" type="text" inputmode="numeric" name="matomo.siteid" size="10" value="[% c.matomo.siteid | html %]" />
+    <div class="hint">Identifiant du site OPAC dans Matomo (Administration › Sites web › Gérer).</div>
    </li>
   </ol>
  </fieldset>
@@ -27,44 +30,48 @@
   <legend>OPAC</legend>
   <ol>
    <li>
-    <label for="opac.enable">Activer :</label>
-    <input type="checkbox"
-           id="opac.enable"
-           name="opac.enable"
-           size="15"
-           value="1"
-           [% IF c.opac.enable == 1 %]checked[% END %]
-           />
-    le tracker à l'OPAC
+    <label for="opac.enable">Activer le tracker&nbsp;:</label>
+    <input type="checkbox" id="opac.enable" name="opac.enable" value="1" [% IF c.opac.enable == 1 %]checked="checked"[% END %] />
+    <div class="hint">Insère le code de suivi Matomo dans les pages de l'OPAC.</div>
+   </li>
+  </ol>
+ </fieldset>
+
+ <fieldset class="rows">
+  <legend>Titres des pages OPAC dans Matomo</legend>
+  <ol>
+   <li>
+    <label for="opac.page.main.title">Accueil&nbsp;:</label>
+    <input id="opac.page.main.title" type="text" name="opac.page.main.title" size="50" value="[% c.opac.page.main.title | html %]" />
    </li>
    <li>
-    <label for="opac.page.main.title">Accueil :</label>
-    <input id="opac.page.main.title" type="text" name="opac.page.main.title" size="50" value="[% c.opac.page.main.title %]" />
+    <label for="opac.page.advsearch.title">Recherche avancée&nbsp;:</label>
+    <input id="opac.page.advsearch.title" type="text" name="opac.page.advsearch.title" size="50" value="[% c.opac.page.advsearch.title | html %]" />
    </li>
    <li>
-    <label for="opac.page.advsearch.title">Recherche avancée :</label>
-    <input id="opac.page.advsearch.title" type="text" name="opac.page.advsearch.title" size="50" value="[% c.opac.page.advsearch.title %]" />
+    <label for="opac.page.results.title">Résultat&nbsp;:</label>
+    <input id="opac.page.results.title" type="text" name="opac.page.results.title" size="50" value="[% c.opac.page.results.title | html %]" />
+    <div class="hint">Suivi de la requête de l'usager.</div>
    </li>
    <li>
-    <label for="opac.page.results.title">Résultat :</label>
-    <input id="opac.page.results.title" type="text" name="opac.page.results.title" size="50" value="[% c.opac.page.results.title %]" />
+    <label for="opac.page.detail.title">Détail notice&nbsp;:</label>
+    <input id="opac.page.detail.title" type="text" name="opac.page.detail.title" size="50" value="[% c.opac.page.detail.title | html %]" />
+    <div class="hint">Suivi du titre de la notice.</div>
    </li>
    <li>
-    <label for="opac.page.detail.title">Détail notice :</label>
-    <input id="opac.page.detail.title" type="text" name="opac.page.detail.title" size="50" value="[% c.opac.page.detail.title %]" />
-   </li>
-   <li>
-    <label for="opac.page.page.title">Page statique :</label>
-    <input id="opac.page.page.title" type="text" name="opac.page.page.title" size="50" value="[% c.opac.page.page.title %]" />
+    <label for="opac.page.page.title">Page statique&nbsp;:</label>
+    <input id="opac.page.page.title" type="text" name="opac.page.page.title" size="50" value="[% c.opac.page.page.title | html %]" />
+    <div class="hint">Suivi du titre de la page.</div>
    </li>
   </ol>
  </fieldset>
 
  <fieldset class="action">
-  <input type="hidden" name="save" value="1" />
-  <input type="submit" value="Enregistrer" />
+  <input type="submit" class="btn btn-primary" value="Enregistrer" />
+  <a class="cancel" href="/cgi-bin/koha/plugins/run.pl?class=[% CLASS | uri %]&method=tool">Annuler</a>
  </fieldset>
 
 </form>
 
 [% INCLUDE "$PLUGIN_DIR/foot.tt" %]
+[% END %]

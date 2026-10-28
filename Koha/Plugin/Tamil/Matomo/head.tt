@@ -1,35 +1,13 @@
-[% INCLUDE 'doc-head-open.inc' %]
- <title>Extension Matomo</title>
-[% INCLUDE 'doc-head-close.inc' %]
-</head>
-<body>
-[% INCLUDE 'header.inc' %]
-[% INCLUDE 'cat-search.inc' %]
-
-<div id="breadcrumbs">
- <a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; 
- <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> &rsaquo; Matomo
+<a href="https://www.matomo.org" title="Site web de Matomo" class="float-end">
+ <img src="/api/v1/contrib/matomo/static/img/matomo.svg" alt="Matomo" height="32"/>
+</a>
+<div id="matomo-tabs" class="toptabs">
+ <ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="nav-item">
+   <a class="nav-link[% IF METHOD == 'tool' %] active[% END %]" href="/cgi-bin/koha/plugins/run.pl?class=[% CLASS | uri %]&method=tool" role="tab">Accueil</a>
+  </li>
+  <li role="presentation" class="nav-item">
+   <a class="nav-link[% IF METHOD == 'configure' %] active[% END %]" href="/cgi-bin/koha/plugins/run.pl?class=[% CLASS | uri %]&method=configure" role="tab">Configuration</a>
+  </li>
+ </ul>
 </div>
-
-<div class="main">
-  <a href="https://www.matomo.org" alt="Site web de Matomo">
-    <img src="/api/v1/contrib/matomo/static/img/matomo.svg"/>
-  </a>
-</div>
-
-<div class="main container-fluid">
- <div class="row">
-
-  <div class="col-md-2">
-   <div id="navmenu">
-    <ul>
-     <ul>
-      <li><a href="?class=[% CLASS %]&method=tool">Accueil </a></li>
-      <li><a href="?class=[% CLASS %]&method=configure">Configuration </a></li>
-     </ul>
-    </ul>
-   </div>
-  </div>
-
-  <div class="col-md-10">
-  

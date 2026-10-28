@@ -1,3 +1,4 @@
+[% WRAPPER 'wrapper-staff-tool-plugin.inc' plugin_title = 'Matomo' method = 'tool' %]
 [% INCLUDE "$PLUGIN_DIR/head.tt" %]
 
 <style>
@@ -19,3 +20,4 @@ ul li, ol li { margin-bottom:10px; }
 </div>
 
 [% INCLUDE "$PLUGIN_DIR/foot.tt" %]
+[% END %]
